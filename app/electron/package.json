@@ -1,0 +1,15 @@
+{
+  "name": "dashpro",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "CarlosNeimar",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "electron": "^33.3.1"
+  }
+}
