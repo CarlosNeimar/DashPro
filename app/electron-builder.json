@@ -1,9 +1,18 @@
 {
   "appId": "com.carlos-neimar.dashpro",
-  "icon": "assets/icon.png",
+  "icon": "public/icon.png",
   "files": [
-    "dist-electron"
+    "dist-electron/**/*", 
+    "dist-react/**/*"     
   ],
+  "extraResources": [
+    {
+      "from": "dist-react",
+      "to": "dist-react",
+      "filter": ["**/*"]
+    }
+  ],
+  "asar": false,
   "mac": {
     "target": "dmg"
   },
