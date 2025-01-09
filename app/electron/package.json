@@ -2,14 +2,17 @@
   "name": "dashpro",
   "version": "1.0.0",
   "type": "module",
-  "main": "main.js",
+  "main": "dist-electron/main",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "transpile:electron": "tsc --project tsconfig.json"
   },
   "author": "CarlosNeimar",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "electron": "^33.3.1"
+    "electron": "^33.3.1",
+    "electron-builder": "^25.1.8",
+    "typescript": "^5.7.3"
   }
 }
