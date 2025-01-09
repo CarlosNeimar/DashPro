@@ -1,7 +1,8 @@
 import { app, BrowserWindow } from "electron";
 import path from "path";
+import {isDev} from "./util.js";
 
-const isDev = !app.isPackaged;
+type test = string;
 
 app.on("ready", () => {
   const mainWindow = new BrowserWindow({
@@ -12,9 +13,9 @@ app.on("ready", () => {
     },
   });
 
-  const startUrl = isDev
-    ? path.join(__dirname, '../dist-react/index.html')
-    : path.join(process.resourcesPath, 'dist-react/index.html'); 
-
-  mainWindow.loadFile(startUrl);
+  if (isDev()){
+    mainWindow.loadURL("http://localhost:5123");
+  } else {
+    mainWindow.loadFile(path.join(app.getAppPath(), '/dist-react/index.html'));
+  }
 });
