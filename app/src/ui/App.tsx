@@ -1,31 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import { ModuleCard } from "./new components/Modulecard";
 
-function App() {
-  const [count, setCount] = useState(0)
+export function App() {
+  const [modules, setModules] = useState([]);
+
+  // Carrega os módulos do backend
+  useEffect(() => {
+    //@ts-ignore
+    window.electron.getModules()
+      .then((data : any) => {
+        setModules(data);
+      })
+      .catch((error : any) => {
+        console.error("Error fetching modules:", error);
+      });
+  }, []);
+
+  // Função para executar um módulo
+  const executeModule = (module: object) => {
+    //@ts-ignore
+    window.electron.executeModule(module)
+      .then(() => {
+        console.log(`Module executed: ${JSON.stringify(module)}`);
+      })
+      .catch((error : any) => {
+        console.error("Error executing module:", error);
+      });
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {modules.map((module: any) => (
+        <ModuleCard
+          key={module.id}
+          name={module.name}
+          path={module.path}
+          classType={module.class}
+          onExecute={() => executeModule(module)}
+        />
+      ))}
+    </div>
+  );
 }
-
-export default App

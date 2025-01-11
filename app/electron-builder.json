@@ -5,14 +5,7 @@
     "dist-electron/**/*", 
     "dist-react/**/*"     
   ],
-  "extraResources": [
-    {
-      "from": "dist-react",
-      "to": "dist-react",
-      "filter": ["**/*"]
-    }
-  ],
-  "asar": false,
+  "extraResources": [ "dist-electron/preload.cjs" ],
   "mac": {
     "target": "dmg"
   },
