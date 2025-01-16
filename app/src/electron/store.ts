@@ -22,14 +22,25 @@ const store = new Store<{
   defaults: {
     modules: [
       {
-        id: "1", name: "Module A", path: "/path/to/module-a", class: "Utility", isFavorite: false,
-        status: ''
+        id: "1",
+        name: "Module A",
+        path: "/path/to/module-a",
+        class: "Utility",
+        isFavorite: false,
+        status: "",
       },
-      { id: "2", name: "Module B", path: "/path/to/module-b", class: "Tool", isFavorite: false, status: '' },
+      {
+        id: "2",
+        name: "Module B",
+        path: "/path/to/module-b",
+        class: "Tool",
+        isFavorite: false,
+        status: "",
+      },
     ],
     settings: {
-      theme: 'light',
-      defaultEditor: 'vscode',
+      theme: "light",
+      defaultEditor: "vscode",
       notifications: true,
     },
   },

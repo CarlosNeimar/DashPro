@@ -1,31 +1,22 @@
-import { useState, useEffect } from "react";
-import { Home } from "./pages/Home";
+import { useState } from "react";
+import { AppDataProvider } from "./context/AppDataContext";
 import { Load } from "./pages/Load";
+import { Home } from "./pages/Home";
+import ModuleManager from "./Testemodules"
 
-export function App() {
-
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Simulate a loading delay
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
+export const App = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
 
   return (
-    <>
-      {loading ? (
+    <AppDataProvider>
+      {isLoaded ? (
         <>
-        {/*//TODO: Pagina de loading */}
+        <Home />
+        <ModuleManager />
         </>
       ) : (
-        <>
-        <Load/>
-        </>
+        <Load onLoadComplete={() => setIsLoaded(true)} />
       )}
-    </>
+    </AppDataProvider>
   );
-}
+};

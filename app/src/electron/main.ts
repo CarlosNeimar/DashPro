@@ -1,43 +1,22 @@
-import { app, BrowserWindow, ipcMain } from "electron";
-import path from "path";
+import { app, BrowserWindow } from "electron";
 import { getPreloadPath } from "./pathResolver.js";
-import store from "./store.js";
+import "./ipc/module.ipc.js"
+import "./ipc/settings.ipc.js"
 
-let mainWindow: BrowserWindow;
-
+let mainWindow: BrowserWindow | null = null;
 
 app.on("ready", () => {
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
     webPreferences: {
       preload: getPreloadPath(),
     },
   });
 
-  // Carregar o frontend
-  mainWindow.loadURL("http://localhost:5123");
-  console.log("Configurações iniciais do store:", store.get("settings"));
-
+  mainWindow.loadURL("http://localhost:5123"); // Substitua pela sua URL
 });
 
-ipcMain.handle("get-settings", async () => {
-  console.log("Obtendo configurações...");
-  return store.get("settings"); // Certifique-se de que 'store' está configurado corretamente.
-});
-
-ipcMain.handle("toggle-favorite", (event, moduleId) => {
-  const modules = store.get("modules");
-  const updatedModules = modules.map((module) =>
-    module.id === moduleId
-      ? { ...module, isFavorite: !module.isFavorite }
-      : module
-  );
-  store.set("modules", updatedModules);
-  return updatedModules;
-});
-
-ipcMain.handle("get-favorites", () => {
-  const modules = store.get("modules");
-  return modules.filter((module) => module.isFavorite);
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
+    app.quit();
+  }
 });
