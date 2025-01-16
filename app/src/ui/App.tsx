@@ -2,10 +2,16 @@ import { useState } from "react";
 import { AppDataProvider } from "./context/AppDataContext";
 import { Load } from "./pages/Load";
 import { Home } from "./pages/Home";
-import ModuleManager from "./Testemodules"
+// import ModuleManager from "./Testemodules"
 
 export const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+
+  function loadpage() {
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 2500);
+  }
 
   return (
     <AppDataProvider>
@@ -13,9 +19,12 @@ export const App = () => {
         <>
         <Home />
         {/* <ModuleManager /> */}
+        {/* <Load onLoadComplete={function (): void {
+            throw new Error("Function not implemented.");
+          } } /> */}
         </>
       ) : (
-        <Load onLoadComplete={() => setIsLoaded(true)} />
+        <Load onLoadComplete={loadpage} />
       )}
     </AppDataProvider>
   );
