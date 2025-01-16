@@ -8,11 +8,12 @@ type AppDataContextType = {
 const AppDataContext = createContext<AppDataContextType | undefined>(undefined);
 
 export const AppDataProvider = ({ children }: { children: ReactNode }) => {
+  // @ts-ignore
   const [settings, setSettings] = useState(() => {
     const storedSettings = localStorage.getItem("settings");
     return storedSettings ? JSON.parse(storedSettings) : {};
   });
-
+  // @ts-ignore
   const [modules, setModules] = useState(() => {
     const storedModules = localStorage.getItem("modules");
     return storedModules ? JSON.parse(storedModules) : [];
