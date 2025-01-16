@@ -12,7 +12,7 @@ export const App = () => {
       {isLoaded ? (
         <>
         <Home />
-        <ModuleManager />
+        {/* <ModuleManager /> */}
         </>
       ) : (
         <Load onLoadComplete={() => setIsLoaded(true)} />
