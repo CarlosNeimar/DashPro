@@ -11,7 +11,9 @@ export type Settings = {
 export type Module = {
   id: string;
   name: string;
-  // Other relevant module properties
+  path: string;
+  class: string;
+  status: string;
 };
 
 export type AppDataContextType = {

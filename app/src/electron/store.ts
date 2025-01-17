@@ -26,16 +26,16 @@ const store = new Store<{
         name: "Module A",
         path: "/path/to/module-a",
         class: "Utility",
-        isFavorite: false,
         status: "",
+        isFavorite: false,
       },
       {
         id: "2",
         name: "Module B",
         path: "/path/to/module-b",
         class: "Tool",
-        isFavorite: false,
         status: "",
+        isFavorite: false,
       },
     ],
     settings: {

@@ -9,6 +9,8 @@ let mainWindow: BrowserWindow | null = null;
 
 app.on("ready", () => {
   mainWindow = new BrowserWindow({
+    width: 1300,
+    height: 700,
     webPreferences: {
       preload: getPreloadPath(),
     },

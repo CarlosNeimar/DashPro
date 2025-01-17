@@ -1,12 +1,13 @@
+import { Header } from "./new components/Header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { useAppData } from "./context/AppDataContext";
-import { Home } from "./pages/Home";
+
+import { Outlet } from "react-router-dom";
 
 import { AppSidebar } from "@/ui/new components/sidebar/app-sidebar";
 import {
   SidebarInset,
   SidebarProvider,
-  SidebarTrigger,
 } from "@/components/ui/sidebar"
 
 export const Layout = () => {
@@ -21,8 +22,8 @@ export const Layout = () => {
       <SidebarProvider>
         <AppSidebar />
         <SidebarInset>
-          {/* Conteudo todo aqui  */}
-          <Home />
+          <Header />          
+          <Outlet />
         </SidebarInset>
       </SidebarProvider>
     </ThemeProvider>
