@@ -3,9 +3,9 @@
 DashPro é um dashboard integrado para gerenciar e rodar seus projetos de forma centralizada. Utilizando tecnologias modernas como React, TypeScript, Vite, Electron, Node.js e MySQL, o sistema é eficiente, rápido e fácil de usar.
 
 ## Cores utilizadas
-- Principal: Azul (#4A90E2) — Para transmitir confiança.
+- Principal: Verde vibrante (#32CD32) — Mais vivo para atrair atenção e indicar ações.
 - Secundária: Cinza escuro (#2C3E50) — Base neutra e profissional.
-- Destaques: Verde vibrante (#32CD32) — Mais vivo para atrair atenção e indicar ações.
+- Destaques: 
 - Contraste: Branco (#FFFFFF) e Preto (#000000) — Para texto e elementos de destaque.
 
 ## Tecnologias utilizadas

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AppDataProvider } from "./context/AppDataContext";
 import { Load } from "./pages/Load";
-import { Home } from "./pages/Home";
+import {Layout} from "./layout"
 // import ModuleManager from "./Testemodules"
 
 export const App = () => {
@@ -17,9 +17,9 @@ export const App = () => {
     <AppDataProvider>
       {isLoaded ? (
         <>
-        <Home />
-        {/* <ModuleManager /> */}
-        {/* <Load onLoadComplete={function (): void {
+          <Layout />
+          {/* <ModuleManager /> */}
+          {/* <Load onLoadComplete={function (): void {
             throw new Error("Function not implemented.");
           } } /> */}
         </>
