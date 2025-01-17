@@ -1,30 +1,59 @@
 import { app, BrowserWindow } from "electron";
-import { getPreloadPath } from "./pathResolver.js";
-import "./ipc/module.ipc.js"
-import "./ipc/settings.ipc.js"
-import {isDev} from "./util.js";
 import path from "path";
+import { setupIpcHandlers } from "./ipc/handlers.js";
+import { StoreService } from "./store/store.js";
+import { isDev } from "./util.js";
+import { getPreloadPath } from "./pathResolver.js";
 
-let mainWindow: BrowserWindow | null = null;
 
-app.on("ready", () => {
-  mainWindow = new BrowserWindow({
-    width: 1300,
-    height: 700,
-    webPreferences: {
-      preload: getPreloadPath(),
-    },
-  });
+export class Main {
+  private mainWindow: BrowserWindow | null = null;
+  private store: StoreService;
 
-  if (isDev()){
-    mainWindow.loadURL("http://localhost:5123");
-  } else {
-    mainWindow.loadFile(path.join(app.getAppPath(), '/dist-react/index.html'));
+  constructor() {
+    this.store = new StoreService();
   }
-});
 
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit();
+  private createWindow() {
+    this.mainWindow = new BrowserWindow({
+      width: 1300,
+      height: 700,
+      webPreferences: {
+        nodeIntegration: false,
+        contextIsolation: true,
+        preload: getPreloadPath(),
+      },
+      autoHideMenuBar: true,
+    });
+
+    if (isDev()) {
+      this.mainWindow.loadURL("http://localhost:5123");
+      // this.mainWindow.webContents.openDevTools();
+    } else {
+      this.mainWindow.loadFile(path.join(app.getAppPath(), 'dist-react/index.html'));
+    }
   }
-});
+
+  public init() {
+    app.on("ready", () => {
+      this.createWindow();
+      setupIpcHandlers(this.store);
+    });
+
+    app.on("window-all-closed", () => {
+      if (process.platform !== "darwin") {
+        app.quit();
+      }
+    });
+
+    app.on("activate", () => {
+      if (this.mainWindow === null) {
+        this.createWindow();
+      }
+    });
+  }
+}
+
+// Inicialização da aplicação
+const main = new Main();
+main.init();
