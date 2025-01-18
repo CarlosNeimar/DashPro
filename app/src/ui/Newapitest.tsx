@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useModules, useModuleClasses, useSettings } from './renderAPI/hooks/useStore';
 
 export default function TestDashboard() {
   const { modules, addModule, updateModule, deleteModule } = useModules();
-  const { moduleClasses, addModuleClass, updateModuleClass, deleteModuleClass } = useModuleClasses();
+  const { moduleClasses, addModuleClass, deleteModuleClass } = useModuleClasses();
   const { settings, updateSettings } = useSettings();
   
   const [newClassName, setNewClassName] = useState('');

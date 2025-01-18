@@ -17,6 +17,7 @@ const ThemeProviderContext = createContext<ThemeProviderState | undefined>(undef
 
 export function ThemeProvider({ children, theme: initialTheme, onThemeChange }: ThemeProviderProps) {
   const [theme, setThemeState] = useState<Theme>(initialTheme);
+  const [isThemeReady, setIsThemeReady] = useState(false);
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -30,12 +31,18 @@ export function ThemeProvider({ children, theme: initialTheme, onThemeChange }: 
     } else {
       root.classList.add(theme);
     }
+    
+    setIsThemeReady(true);
   }, [theme]);
 
   const setTheme = (newTheme: Theme) => {
     setThemeState(newTheme);
     onThemeChange(newTheme);
   };
+
+  if (!isThemeReady) {
+    return null;
+  }
 
   return (
     <ThemeProviderContext.Provider value={{ theme, setTheme }}>

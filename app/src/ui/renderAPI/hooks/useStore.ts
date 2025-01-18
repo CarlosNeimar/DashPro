@@ -8,28 +8,60 @@ export function useSettings() {
     defaultEditor: 'vscode',
     notifications: false
   });
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    storeApi.getSettings().then(newSettings => {
-      if (newSettings) {
-        setSettings(newSettings);
+    const loadSettings = async () => {
+      console.log('Iniciando carregamento de configurações');
+      try {
+        const newSettings = await storeApi.getSettings();
+        console.log('Configurações recebidas:', newSettings);
+        if (newSettings) {
+          setSettings(newSettings);
+        }
+      } catch (error) {
+        console.error('Erro ao carregar configurações:', error);
+      } finally {
+        console.log('Finalizando carregamento de configurações');
+        setIsLoading(false);
       }
-    });
+    };
+
+    loadSettings();
   }, []);
 
   const updateSettings = async (updates: Partial<Settings>) => {
-    await storeApi.updateSettings(updates);
-    setSettings(current => ({ ...current, ...updates }));
+    try {
+      await storeApi.updateSettings(updates);
+      setSettings(current => ({ ...current, ...updates }));
+    } catch (error) {
+      console.error('Erro ao atualizar configurações:', error);
+    }
   };
 
-  return { settings, updateSettings };
+  return { settings, updateSettings, isLoading };
 }
 
 export function useModules() {
   const [modules, setModules] = useState<Module[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    storeApi.getModules().then(setModules);
+    const loadModules = async () => {
+      console.log('Iniciando carregamento dos modulos');
+      try {
+        const data = await storeApi.getModules();
+        setModules(data);
+        console.log('Modulos recebidos:', data);
+      } catch (error) {
+        console.error('Erro ao carregar módulos:', error);
+      } finally {
+        console.log('Finalizando carregamento dos modulos');
+        setIsLoading(false);
+      }
+    };
+
+    loadModules();
   }, []);
 
   const addModule = async (module: Module) => {
@@ -47,15 +79,29 @@ export function useModules() {
     setModules(await storeApi.getModules());
   };
 
-  return { modules, addModule, updateModule, deleteModule };
-
+  return { modules, addModule, updateModule, deleteModule, isLoading };
 }
 
 export function useModuleClasses() {
   const [moduleClasses, setModuleClasses] = useState<ModuleClass[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    storeApi.getModuleClasses().then(setModuleClasses);
+    const loadModuleClasses = async () => {
+      console.log('Iniciando carregamento das classes');
+      try {
+        const data = await storeApi.getModuleClasses();
+        setModuleClasses(data);
+        console.log('Classes recebidas:', data);
+      } catch (error) {
+        console.error('Erro ao carregar classes de módulos:', error);
+      } finally {
+        console.log('Finalizando carregamento das classes');
+        setIsLoading(false);
+      }
+    };
+
+    loadModuleClasses();
   }, []);
 
   const addModuleClass = async (moduleClass: ModuleClass) => {
@@ -73,5 +119,5 @@ export function useModuleClasses() {
     setModuleClasses(await storeApi.getModuleClasses());
   };
 
-  return { moduleClasses, addModuleClass, updateModuleClass, deleteModuleClass };
+  return { moduleClasses, addModuleClass, updateModuleClass, deleteModuleClass, isLoading };
 }
