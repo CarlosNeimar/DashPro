@@ -3,7 +3,7 @@ import { useModules, useModuleClasses, useSettings } from './renderAPI/hooks/use
 
 export default function TestDashboard() {
   const { modules, addModule, updateModule, deleteModule } = useModules();
-  const { moduleClasses, addModuleClass, deleteModuleClass } = useModuleClasses();
+  const { moduleClasses, addModuleClass, updateModuleClass, deleteModuleClass } = useModuleClasses();
   const { settings, updateSettings } = useSettings();
   
   const [newClassName, setNewClassName] = useState('');

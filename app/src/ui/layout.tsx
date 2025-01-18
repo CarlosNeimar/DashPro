@@ -1,5 +1,5 @@
 import { Header } from "./new components/Header";
-import { Theme ,ThemeProvider } from "@/components/theme-provider";
+import { Theme, ThemeProvider } from "@/components/theme-provider";
 import { useSettings } from './renderAPI/hooks/useStore';
 
 
@@ -11,16 +11,28 @@ import {
   SidebarProvider,
 } from "@/components/ui/sidebar"
 
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { Home } from './pages/Home.tsx'
+
+
 export const Layout = () => {
   const { settings, updateSettings, isLoading } = useSettings();
   const theme = settings.theme as Theme;
 
   console.log('Renderizando Layout com tema:', theme);
-  
+
   // Se ainda estiver carregando as configurações, não renderiza nada
   if (isLoading) {
     return null;
   }
+
+
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Home />,
+    }
+  ])
 
   return (
     <ThemeProvider
@@ -34,7 +46,7 @@ export const Layout = () => {
         <AppSidebar />
         <SidebarInset>
           <Header />
-          <Outlet />
+          <RouterProvider router={router} />
         </SidebarInset>
       </SidebarProvider>
     </ThemeProvider>

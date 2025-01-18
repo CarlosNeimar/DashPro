@@ -1,24 +1,53 @@
-import React from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
-type ModuleCardProps = {
+interface ModulecardProps {
+  id: string;
   name: string;
   path: string;
-  classType: string;
-  onExecute: () => void;
-};
+  Classname: string;
+  Classicon: string;
+  Classcolor: string;
+  status: string;
+  isFavorite: boolean;
+  description?: string;
+}
 
-export const ModuleCard: React.FC<ModuleCardProps> = ({ name, path, classType, onExecute }) => {
+export const Modulecard: React.FC<ModulecardProps> = ({
+  id,
+  name,
+  path,
+  Classname,
+  Classicon,
+  Classcolor,
+  status,
+  isFavorite,
+  description,
+}) => {
   return (
-    <div className="border rounded-lg p-4 shadow-md bg-white">
-      <h2 className="text-lg font-bold">{name}</h2>
-      <p className="text-sm text-gray-600">Path: {path}</p>
-      <p className="text-sm text-gray-600">Class: {classType}</p>
-      <button
-        onClick={onExecute}
-        className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-      >
-        Execute
-      </button>
-    </div>
+    <Card>
+      <CardHeader>
+        <CardTitle>{name}</CardTitle>
+        <CardDescription>{description}</CardDescription>
+      </CardHeader>
+      <CardContent className="grid gap-4">
+        <div className="flex items-center space-x-4 rounded-md border p-4">
+          <div className="flex-1 space-y-1">
+            <p className="text-sm font-medium leading-none">{Classname}</p>
+            <p className="text-sm text-muted-foreground">{status}</p>
+          </div>
+        </div>
+      </CardContent>
+      <CardFooter>
+        <Button className="w-full">Mark all as read</Button>
+      </CardFooter>
+    </Card>
   );
 };
