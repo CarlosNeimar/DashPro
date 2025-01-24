@@ -45,42 +45,46 @@ export function useSettings() {
 export function useModules() {
   const [modules, setModules] = useState<Module[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [refresh, setRefresh] = useState(false);
+
+  const handleRefresh = () => setRefresh(!refresh);
 
   useEffect(() => {
     const loadModules = async () => {
-      console.log('Iniciando carregamento dos modulos');
+      console.log('Iniciando carregamento dos módulos');
       try {
         const data = await storeApi.getModules();
         setModules(data);
-        console.log('Modulos recebidos:', data);
+        console.log('Módulos recebidos:', data);
       } catch (error) {
         console.error('Erro ao carregar módulos:', error);
       } finally {
-        console.log('Finalizando carregamento dos modulos');
+        console.log('Finalizando carregamento dos módulos');
         setIsLoading(false);
       }
     };
 
     loadModules();
-  }, []);
+  }, [refresh]); // Dependendo do valor de refresh, executa o efeito.
 
   const addModule = async (module: Module) => {
     await storeApi.addModule(module);
-    setModules(await storeApi.getModules());
+    handleRefresh(); // Atualiza o estado para forçar um novo carregamento.
   };
 
   const updateModule = async (id: string, updates: Partial<Module>) => {
     await storeApi.updateModule(id, updates);
-    setModules(await storeApi.getModules());
+    handleRefresh();
   };
 
   const deleteModule = async (id: string) => {
     await storeApi.deleteModule(id);
-    setModules(await storeApi.getModules());
+    handleRefresh();
   };
 
-  return { modules, addModule, updateModule, deleteModule, isLoading };
+  return { modules, addModule, updateModule, deleteModule, isLoading, handleRefresh };
 }
+
 
 export function useModuleClasses() {
   const [moduleClasses, setModuleClasses] = useState<ModuleClass[]>([]);

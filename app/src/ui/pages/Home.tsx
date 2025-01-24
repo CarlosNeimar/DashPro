@@ -5,36 +5,30 @@ import { Favoritemodules } from './Home-components/Favoritemodules';
 import { useEffect, useState } from 'react';
 
 export const Home = () => {
-  const { modules } = useModules();
+  const { modules, handleRefresh } = useModules();
   const [haveModules, setHaveModules] = useState(false);
   const [haveFavorite, setHaveFavorite] = useState(false);
 
   useEffect(() => {
     if (modules.length > 0) {
       setHaveModules(true);
-      if (modules.some(module => module.isFavorite)) {
-        setHaveFavorite(true);
-      }
+      setHaveFavorite(modules.some((module) => module.isFavorite));
+    } else {
+      setHaveModules(false);
+      setHaveFavorite(false);
     }
   }, [modules]);
-
 
   return (
     <div className="home-container h-screen flex flex-col">
       {haveModules ? (
         <>
-          {
-            haveFavorite ? (
-              <Favoritemodules />
-            ) :
-              null
-          }
-          <Allmodules />
+          {haveFavorite && <Favoritemodules onRefresh={handleRefresh} />}
+          <Allmodules onRefresh={handleRefresh} />
         </>
       ) : (
         <Nomodules />
-      )
-      }
+      )}
     </div>
   );
 };
