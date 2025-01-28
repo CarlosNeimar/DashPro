@@ -5,7 +5,7 @@ import { Favoritemodules } from './Home-components/Favoritemodules';
 import { useEffect, useState } from 'react';
 
 export const Home = () => {
-  const { modules, handleRefresh } = useModules();
+  const { modules } = useModules();
   const [haveModules, setHaveModules] = useState(false);
   const [haveFavorite, setHaveFavorite] = useState(false);
 
@@ -23,8 +23,8 @@ export const Home = () => {
     <div className="home-container h-screen flex flex-col">
       {haveModules ? (
         <>
-          {haveFavorite && <Favoritemodules onRefresh={handleRefresh} />}
-          <Allmodules onRefresh={handleRefresh} />
+          {haveFavorite && <Favoritemodules />}
+          <Allmodules />
         </>
       ) : (
         <Nomodules />

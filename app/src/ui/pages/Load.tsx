@@ -1,13 +1,23 @@
 import { motion } from "framer-motion";
 import LOADING_ICON from "../assets/icons/Logo.json";
 import LordIcon from "../lordicons/Lordi";
-interface LoadProps {
-  loadingMessage?: string;
-}
+import { useEffect } from "react";
+// interface LoadProps {
+//   loadingMessage?: string;
+// }
 
-export const Load: React.FC<LoadProps> = ({
-  loadingMessage = "Carregando configurações do sistema"
-}) => {
+// export const Load: React.FC<LoadProps> = ({
+//   loadingMessage = "Carregando configurações do sistema"
+// }) => {
+export const Load = () => {
+
+  useEffect(() => {
+    setTimeout(() => {
+      window.location.href = "/loading";
+      console.log("Redirecting to /loading");
+    }, 2500);
+  });
+
   return (
     <div className="flex min-h-svh bg-stone-950 items-center justify-center">      <motion.div
       className="flex flex-col items-center"
@@ -37,13 +47,13 @@ export const Load: React.FC<LoadProps> = ({
       </div>
 
       <div className="mt-8 space-y-2 text-center">
-        <motion.p
+        {/* <motion.p
           className="text-white/80 text-sm font-medium"
           whileHover={{ x: 10 }}
           transition={{ type: "spring", stiffness: 300 }}
         >
           {loadingMessage}
-        </motion.p>
+        </motion.p> */}
         <motion.p
           className="text-white/40 text-xs"
           whileHover={{ x: -10 }}

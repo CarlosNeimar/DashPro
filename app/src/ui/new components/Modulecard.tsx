@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { StarOff } from 'lucide-react';
+import { StarOff, WindArrowDown } from 'lucide-react';
 import { Card } from "@/components/ui/card";
 import LordIcon from "../lordicons/Lordi";
 import Favorit from "@/ui/assets/icons/Start-favorite.json";
@@ -15,7 +15,6 @@ interface ModulecardProps {
   status: string;
   isFavorite: boolean;
   description?: string;
-  onFavoriteChange: () => void; // Prop de atualização
 }
 
 const isColorLight = (color: string): boolean => {
@@ -56,7 +55,6 @@ export const Modulecard: React.FC<ModulecardProps> = ({
   Classicon,
   Classcolor,
   isFavorite: initialFavorite,
-  onFavoriteChange,
 }) => {
   const [isFavorite, setIsFavorite] = React.useState(initialFavorite);
   const { updateModule } = useModules();
@@ -65,8 +63,8 @@ export const Modulecard: React.FC<ModulecardProps> = ({
   const iconColor = isYellowOrOrange(Classcolor)
     ? 'white'
     : isColorLight(Classcolor)
-    ? '#F09C2B'
-    : 'yellow';
+      ? '#F09C2B'
+      : 'yellow';
 
   const handleFavoriteToggle = async () => {
     const updatedFavorite = !isFavorite;
@@ -74,10 +72,10 @@ export const Modulecard: React.FC<ModulecardProps> = ({
     try {
       await updateModule(id, { isFavorite: updatedFavorite });
       console.log(`Módulo ${id} atualizado com sucesso.`);
-      onFavoriteChange();
+      console.log("Fazendo atualização de favoritos");
+      window.location.reload();
     } catch (error) {
       console.error(`Erro ao atualizar favorito do módulo ${id}:`, error);
-      // Reverter a mudança no estado local em caso de erro
       setIsFavorite(!updatedFavorite);
     }
   };
@@ -88,16 +86,17 @@ export const Modulecard: React.FC<ModulecardProps> = ({
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.2 }}
+      style={{ position: 'static' }}
     >
       <Card
-        className="h-72 relative overflow-hidden cursor-pointer"
+        className="h-72 overflow-hidden cursor-pointer group"
         style={{ backgroundColor: Classcolor, color: textColor }}
       >
         {/* Favorite Button */}
         <motion.button
           whileTap={{ scale: 0.9 }}
           onClick={handleFavoriteToggle}
-          className="absolute top-4 right-4 z-10"
+          className="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         >
           {isFavorite ? (
             <LordIcon

@@ -1,23 +1,19 @@
 import { useModules } from '../../renderAPI/hooks/useStore';
 import { Modulecard } from '@/ui/new components/Modulecard';
 
-interface AllmodulesProps {
-  onRefresh: () => void;
-}
-
-export const Allmodules: React.FC<AllmodulesProps> = ({ onRefresh}) => {
+export const Allmodules = () => {
   const { modules } = useModules();
 
   return (
-    <div className="bottom-section flex-grow-[1] bg-popover p-4">
-      <div className="w-fit">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-          Todos os Modulos
+    <div className="top-section flex-grow-[3] bg-popover p-4">
+      <div className="w-fit mx-auto">
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 text-center">
+          Toods os Módulos
         </h2>
       </div>
 
-      {modules.map((module) => (
-        <div className="block w-52">
+      <div className="grid grid-cols-5 gap-4 mt-5">
+        {modules.map((module) => (
           <Modulecard
             key={module.id}
             id={module.id}
@@ -29,10 +25,9 @@ export const Allmodules: React.FC<AllmodulesProps> = ({ onRefresh}) => {
             status={module.status}
             isFavorite={module.isFavorite}
             description={module.description}
-            onFavoriteChange={onRefresh}
           />
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };

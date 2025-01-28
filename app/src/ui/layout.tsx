@@ -2,16 +2,11 @@ import { Header } from "./new components/Header";
 import { Theme, ThemeProvider } from "@/components/theme-provider";
 import { useSettings } from './renderAPI/hooks/useStore';
 
-
-import { Outlet } from "react-router-dom";
-
 import { AppSidebar } from "@/ui/new components/sidebar/app-sidebar";
 import {
   SidebarInset,
   SidebarProvider,
 } from "@/components/ui/sidebar"
-
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Home } from './pages/Home.tsx'
 
 
@@ -26,14 +21,6 @@ export const Layout = () => {
     return null;
   }
 
-
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <Home />,
-    }
-  ])
-
   return (
     <ThemeProvider
       theme={theme}
@@ -46,7 +33,7 @@ export const Layout = () => {
         <AppSidebar />
         <SidebarInset>
           <Header />
-          <RouterProvider router={router} />
+          <Home />
         </SidebarInset>
       </SidebarProvider>
     </ThemeProvider>

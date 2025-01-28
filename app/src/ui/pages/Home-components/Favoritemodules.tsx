@@ -1,39 +1,38 @@
 import { useModules } from '../../renderAPI/hooks/useStore';
 import { Modulecard } from '@/ui/new components/Modulecard';
 
-interface FavoritesProps {
-  onRefresh: () => void;
-}
-
-export const Favoritemodules: React.FC<FavoritesProps> = ({ onRefresh}) => {
+export const Favoritemodules = () => {
   const { modules } = useModules();
 
   return (
     <>
       <div className="top-section flex-grow-[3] bg-background p-4">
-        <div className="w-fit">
-          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-            Principais Modulos
+        <div className="w-fit mx-auto">
+          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 text-center">
+            Principais Módulos
           </h2>
         </div>
-        {modules.map((module) => (
-          <div className="block w-52">
-            <Modulecard
-              key={module.id}
-              id={module.id}
-              name={module.name}
-              path={module.path}
-              Classname={module.class.name}
-              Classicon={module.class.icon}
-              Classcolor={module.class.color}
-              status={module.status}
-              isFavorite={module.isFavorite}
-              description={module.description}
-              onFavoriteChange={onRefresh}
-            />
-          </div>
-            ))}
+
+        {/* Grid centralizado */}
+        <div className="grid grid-cols-1 ml-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 justify-items-center">
+          {modules.map((module) => (
+            <div className="block w-52">
+              <Modulecard
+                key={module.id}
+                id={module.id}
+                name={module.name}
+                path={module.path}
+                Classname={module.class.name}
+                Classicon={module.class.icon}
+                Classcolor={module.class.color}
+                status={module.status}
+                isFavorite={module.isFavorite}
+                description={module.description}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </>
-  )
-}
+  );
+};
