@@ -28,6 +28,7 @@ export const Favoritemodules = () => {
                 status={module.status}
                 isFavorite={module.isFavorite}
                 description={module.description}
+                format='title'
               />
             </div>
           ))}

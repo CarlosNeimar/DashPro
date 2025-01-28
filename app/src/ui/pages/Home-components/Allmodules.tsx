@@ -12,20 +12,26 @@ export const Allmodules = () => {
         </h2>
       </div>
 
-      <div className="grid grid-cols-5 gap-4 mt-5">
+      <div className="grid grid-cols-5 gap-4 ml-5 mt-5">
         {modules.map((module) => (
-          <Modulecard
-            key={module.id}
-            id={module.id}
-            name={module.name}
-            path={module.path}
-            Classname={module.class.name}
-            Classicon={module.class.icon}
-            Classcolor={module.class.color}
-            status={module.status}
-            isFavorite={module.isFavorite}
-            description={module.description}
-          />
+
+          [...Array(5)].map((_, index) => (
+            <div className="block w-52">
+              <Modulecard
+                key={module.id}
+                id={module.id}
+                name={module.name}
+                path={module.path}
+                Classname={module.class.name}
+                Classicon={module.class.icon}
+                Classcolor={module.class.color}
+                status={module.status}
+                isFavorite={module.isFavorite}
+                description={module.description}
+                format='group'
+              />
+            </div>
+          ))
         ))}
       </div>
     </div>
