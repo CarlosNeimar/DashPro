@@ -16,9 +16,8 @@ export const Favoritemodules = () => {
         {/* Grid centralizado */}
         <div className="grid grid-cols-1 ml-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 justify-items-center">
           {modules.map((module) => (
-            <div className="block w-52">
+            <div key={module.id} className="block w-52"> {/* Moved the key prop here */}
               <Modulecard
-                key={module.id}
                 id={module.id}
                 name={module.name}
                 path={module.path}

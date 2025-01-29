@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import LordIcon from "../lordicons/Lordi";
 import Favorit from "@/ui/assets/icons/Start-favorite.json";
 import { useModules } from "@/ui/renderAPI/hooks/useStore";
+import { Player } from '@lordicon/react';
 
 // Dynamic icon import function
 const importIcon = async (iconName: string) => {
@@ -142,6 +143,7 @@ export const Modulecard: React.FC<ModulecardProps> = ({
     }
   };
 
+
   return (
     <div
       className="relative"
@@ -202,16 +204,15 @@ export const Modulecard: React.FC<ModulecardProps> = ({
           {/* Icon Container */}
           <motion.div
             className="w-32 h-32 rounded-xl flex items-center justify-center"
-            whileHover={{ rotate: 5 }}
+            // whileHover={{ rotate: 5 }}
             transition={{ duration: 0.2 }}
           >
             {iconData ? (
               <LordIcon
-                icon={iconData}
-                size={200}
-                trigger="hover"
-                colors={`primary:${textColor},secondary:white'
-                `}
+              icon={iconData}
+              size={125}
+              trigger='hover'
+              colors={`primary:${textColor},secondary:#32CD32`}
               />
             ) : (
               <span className="text-4xl">{Classicon}</span>
