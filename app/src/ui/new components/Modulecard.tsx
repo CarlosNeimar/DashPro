@@ -5,8 +5,6 @@ import { Card } from "@/components/ui/card";
 import LordIcon from "../lordicons/Lordi";
 import Favorit from "@/ui/assets/icons/Start-favorite.json";
 import { useModules } from "@/ui/renderAPI/hooks/useStore";
-import { Player } from '@lordicon/react';
-
 // Dynamic icon import function
 const importIcon = async (iconName: string) => {
   try {
