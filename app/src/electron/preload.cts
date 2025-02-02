@@ -19,5 +19,8 @@ contextBridge.exposeInMainWorld('electron', {
     updateModuleClass: (id: string, updates: any) => 
       ipcRenderer.invoke('update-module-class', id, updates),
     deleteModuleClass: (id: string) => ipcRenderer.invoke('delete-module-class', id),
+
+    // Icons
+    getIcons: () => ipcRenderer.invoke('get-icons'),
   }
 });

@@ -16,6 +16,8 @@ const storeApi = {
 
     window.electron.store.updateModuleClass(id, updates),
   deleteModuleClass: (id: string) => window.electron.store.deleteModuleClass(id),
+
+  getIcons: () => window.electron.store.getIcons(),
 };
 
 export default storeApi;

@@ -78,7 +78,7 @@ export const Nomodules = () => {
           {/* Botão Nova Classe */}
           <button
             className="flex items-center space-x-4 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-            onClick={() => console.log('Nova classe clicado!')}
+            onClick={() => window.location.href = 'home/newclass'}
           >
             <LordIcon
               icon={Addclass}

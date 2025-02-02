@@ -120,3 +120,25 @@ export function useModuleClasses() {
 
   return { moduleClasses, addModuleClass, updateModuleClass, deleteModuleClass, isLoading };
 }
+
+export function useIcons() {
+  const [icons, setIcons] = useState<{ name: string; path: string }[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const loadIcons = async () => {
+      try {
+        const data = await storeApi.getIcons();
+        setIcons(data);
+      } catch (error) {
+        console.error('Erro ao carregar ícones:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadIcons();
+  }, []);
+
+  return { icons, isLoading };
+}

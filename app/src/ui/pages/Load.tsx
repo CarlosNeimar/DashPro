@@ -13,8 +13,7 @@ export const Load = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      window.location.href = "/loading";
-      console.log("Redirecting to /loading");
+      window.location.href = "/home";
     }, 2500);
   });
 

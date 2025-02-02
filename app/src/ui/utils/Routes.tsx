@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import { App } from "../App";
 import { Load } from "../pages/Load";
 import { Layout } from "../layout";
+import { Newclass } from "../pages/Newclass";
+import { Home } from '../pages/Home'; // Importe o componente Home
 
 export const Routes = createBrowserRouter([
   {
@@ -13,9 +15,19 @@ export const Routes = createBrowserRouter([
         element: <Load />
       },
       {
-        path: "/loading",
+        path: "/home",
         element: <Layout />,
-      }
+        children: [
+          {
+            path: "",
+            element: <Home />
+          },
+          {
+            path: "newclass",
+            element: <Newclass />
+          }
+        ]
+      },
     ]
   }
-])
+]);

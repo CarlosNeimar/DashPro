@@ -27,6 +27,7 @@ interface ModulecardProps {
   isFavorite: boolean;
   description?: string;
   format?: string;
+  preview?: boolean;
 }
 
 const isColorLight = (color: string): boolean => {
@@ -68,6 +69,7 @@ export const Modulecard: React.FC<ModulecardProps> = ({
   Classcolor,
   isFavorite: initialFavorite,
   format,
+  preview,
 }) => {
   const [isFavorite, setIsFavorite] = React.useState(initialFavorite);
   const [isHovered, setIsHovered] = React.useState(false);
@@ -90,16 +92,18 @@ export const Modulecard: React.FC<ModulecardProps> = ({
   }, [Classicon]);
 
   const handleFavoriteToggle = async () => {
-    const updatedFavorite = !isFavorite;
-    setIsFavorite(updatedFavorite);
-    try {
-      await updateModule(id, { isFavorite: updatedFavorite });
-      console.log(`Módulo ${id} atualizado com sucesso.`);
-      console.log("Fazendo atualização de favoritos");
-      window.location.reload();
-    } catch (error) {
-      console.error(`Erro ao atualizar favorito do módulo ${id}:`, error);
-      setIsFavorite(!updatedFavorite);
+    if (!preview) {
+      const updatedFavorite = !isFavorite;
+      setIsFavorite(updatedFavorite);
+      try {
+        await updateModule(id, { isFavorite: updatedFavorite });
+        console.log(`Módulo ${id} atualizado com sucesso.`);
+        console.log("Fazendo atualização de favoritos");
+        window.location.reload();
+      } catch (error) {
+        console.error(`Erro ao atualizar favorito do módulo ${id}:`, error);
+        setIsFavorite(!updatedFavorite);
+      }
     }
   };
 
@@ -207,10 +211,10 @@ export const Modulecard: React.FC<ModulecardProps> = ({
           >
             {iconData ? (
               <LordIcon
-              icon={iconData}
-              size={125}
-              trigger='hover'
-              colors={`primary:${textColor},secondary:#32CD32`}
+                icon={iconData}
+                size={125}
+                trigger='hover'
+                colors={`primary:${textColor},secondary:#32CD32`}
               />
             ) : (
               <span className="text-4xl">{Classicon}</span>

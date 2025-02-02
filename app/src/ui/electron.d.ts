@@ -15,6 +15,9 @@ export interface ElectronAPI {
     addModuleClass: (moduleClass: any) => Promise<void>;
     updateModuleClass: (id: string, updates: any) => Promise<void>;
     deleteModuleClass: (id: string) => Promise<void>;
+
+    getIcons: () => Promise<{ name: string; path: string }[]>;
+
   }
 }
 
