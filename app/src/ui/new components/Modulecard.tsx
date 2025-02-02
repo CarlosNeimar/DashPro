@@ -8,7 +8,7 @@ import { useModules } from "@/ui/renderAPI/hooks/useStore";
 // Dynamic icon import function
 const importIcon = async (iconName: string) => {
   try {
-    const icon = await import(`@/ui/assets/icons/${iconName}.json`);
+    const icon = await import(`@/ui/assets/icons/modulesicons/${iconName}.json`);
     return icon.default;
   } catch (error) {
     console.error(`Error loading icon ${iconName}:`, error);

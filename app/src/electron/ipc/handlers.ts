@@ -29,18 +29,21 @@ export function setupIpcHandlers(store: StoreService) {
   // Icons handlers with error handling
   ipcMain.handle('get-icons', async () => {
     try {
-      const iconsPath = path.resolve(__dirname, '../../ui/assets/icons');
-      
-      // Check if directory exists
+      const iconsPath = path.resolve(__dirname, '../../src/ui/assets/icons/modulesicons');
+  
       if (!fs.existsSync(iconsPath)) {
         console.error(`Icons directory not found: ${iconsPath}`);
         return [];
       }
-
+  
       const files = fs.readdirSync(iconsPath);
-
-      return files.map(file => ({
-        name: file,
+  
+      // Filtra apenas arquivos .json
+      const jsonFiles = files.filter(file => file.endsWith('.json'));
+  
+      // Retorna os arquivos sem a extensão .json
+      return jsonFiles.map(file => ({
+        name: file.replace('.json', ''), // Remove a extensão .json
         path: path.join(iconsPath, file)
       }));
     } catch (error) {

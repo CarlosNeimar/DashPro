@@ -14,34 +14,41 @@ export const Newclass = () => {
     <div className="h-screen flex">
       <div className="grid grid-cols-2 gap-4 p-10 w-full">
         <Newclassforms formData={formData} setFormData={setFormData} />
-        <div className="flex justify-center w-full">
-          <div className="block w-52 mr-5">
-            <Modulecard
-              id='preview'
-              name='exemple'
-              path='exemple'
-              Classname={formData.className}
-              Classicon={formData.icon}
-              Classcolor={formData.color}
-              status='string'
-              isFavorite={false}
-              format='group'
-              preview={true}
-            />
+        <div>
+          <div className="flex justify-center">
+            <h3 className="mt-8 scroll-m-20 text-2xl mb-5 font-semibold tracking-tight">
+              {formData.className || ''}
+            </h3>
           </div>
-          <div className="block w-52">
-            <Modulecard
-              id='preview'
-              name='exemple'
-              path='exemple'
-              Classname={formData.className}
-              Classicon={formData.icon}
-              Classcolor={formData.color}
-              status='string'
-              isFavorite={true}
-              format='title'
-              preview={true}
-            />
+          <div className="flex justify-center w-full">
+            <div className="block w-52 mr-5">
+              <Modulecard
+                id='preview'
+                name='exemple'
+                path='exemple'
+                Classname={formData.className}
+                Classicon={formData.icon}
+                Classcolor={formData.color}
+                status='string'
+                isFavorite={false}
+                format='group'
+                preview={true}
+              />
+            </div>
+            <div className="block w-52">
+              <Modulecard
+                id='preview'
+                name='exemple'
+                path='exemple'
+                Classname={formData.className}
+                Classicon={formData.icon}
+                Classcolor={formData.color}
+                status='string'
+                isFavorite={true}
+                format='title'
+                preview={true}
+              />
+            </div>
           </div>
         </div>
       </div>
