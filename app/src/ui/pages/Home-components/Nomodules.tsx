@@ -92,7 +92,7 @@ export const Nomodules = () => {
           {/* Botão Novo Módulo */}
           <button
             className="flex items-center space-x-4 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-            onClick={() => console.log('Novo modulo clicado!')}
+            onClick={() => window.location.href = 'home/newmodule'}
           >
             <LordIcon
               icon={Addmodules}

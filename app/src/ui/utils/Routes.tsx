@@ -4,6 +4,7 @@ import { Load } from "../pages/Load";
 import { Layout } from "../layout";
 import { Newclass } from "../pages/Newclass";
 import { Home } from '../pages/Home'; // Importe o componente Home
+import { Newmodule } from "../pages/Newmodule";
 
 export const Routes = createBrowserRouter([
   {
@@ -25,6 +26,9 @@ export const Routes = createBrowserRouter([
           {
             path: "newclass",
             element: <Newclass />
+          },          {
+            path: "newmodule",
+            element: <Newmodule />
           }
         ]
       },
